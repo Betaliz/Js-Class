@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEMDEV CLASS</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #ef233c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .real-world {
+            background-color: #e6f7ff;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .real-world h4 {
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'JS';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            border-radius: 0 0 0 4px;
+        }
+        
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .note h4 {
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+        }
+        
+        .exercise {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .exercise h4 {
+            color: #4caf50;
+            margin-bottom: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #f1f3f5;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* New styles for editable code blocks */
+        .code-block-container {
+            position: relative;
+        }
+        
+        .code-block {
+            white-space: pre;
+            min-height: 100px;
+            outline: none;
+        }
+        
+        .code-actions {
+            position: absolute;
+            top: 5px;
+            right: 40px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .code-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .code-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .run-btn {
+            background-color: var(--success);
+        }
+        
+        .save-btn {
+            background-color: var(--warning);
+        }
+        
+        .output {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 5px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="kemdev (2).png" alt="KEMDEV Logo" id="kemdev">
+                <span class="logo-text">KEMDEV</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#creating">Creating Objects</a></li>
+                    <li><a href="#accessing">Accessing Properties</a></li>
+                    <li><a href="#methods">Methods</a></li>
+                    <li><a href="#real-world">Real World Apps</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Master JavaScript Objects</h1>
+            <p>Learn how to work with objects through practical examples and real-world applications. Perfect for beginners!</p>
+            <a href="#creating" class="btn">Start Learning</a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section id="creating">
+            <h2>Creating Objects</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-object-group"></i>
+                    </div>
+                    <h3>Object Literal Syntax</h3>
+                </div>
+                <p>The simplest way to create an object is using the object literal syntax with curly braces <code>{}</code>.</p>
+                
+                <div class="code-block-container">
+                    <div class="code-actions">
+                        <button class="code-btn run-btn" onclick="runCode(this)">Run</button>
+                        <button class="code-btn save-btn" onclick="saveCode(this)">Save</button>
+                    </div>
+                    <div class="code-block" contenteditable="true" spellcheck="false">
+// Creating a user object
+const user = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 28,
+    isAdmin: false,
+    address: {
+        street: "123 Main St",
+        city: "New York"
+    }
+};
+
+// Try editing this code and click Run to see the output
+console.log(user.firstName); // Accessing property with dot notation
+                    </div>
+                    <div class="output"></div>
+                </div>
+                
+                <div class="real-world">
+                    <h4><i class="fas fa-globe"></i> Real World Application</h4>
+                    <p>User profiles in web applications are perfect examples of objects. Each user has properties like name, email, preferences, and address information that can be neatly organized in an object.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Constructor Functions</h3>
+                </div>
+                <p>When you need to create multiple similar objects, constructor functions are useful.</p>
+                
+                <div class="code-block-container">
+                    <div class="code-actions">
+                        <button class="code-btn run-btn" onclick="runCode(this)">Run</button>
+                        <button class="code-btn save-btn" onclick="saveCode(this)">Save</button>
+                    </div>
+                    <div class="code-block" contenteditable="true" spellcheck="false">
+// Product constructor function
+function Product(name, price, inStock) {
+    this.name = name;
+    this.price = price;
+    this.inStock = inStock;
+    
+    this.displayInfo = function() {
+        console.log(`${this.name} - $${this.price}`);
+    };
+}
+
+// Creating product instances
+const laptop = new Product("MacBook Pro", 1999, true);
+const phone = new Product("iPhone 13", 999, true);
+
+laptop.displayInfo(); // MacBook Pro - $1999
+phone.displayInfo();  // iPhone 13 - $999
+                    </div>
+                    <div class="output"></div>
+                </div>
+                
+                <div class="real-world">
+                    <h4><i class="fas fa-globe"></i> Real World Application</h4>
+                    <p>E-commerce systems use this pattern extensively. Each product in a store can be an object instance created from a Product constructor, making inventory management efficient.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="accessing">
+            <h2>Accessing Object Properties</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Dot Notation vs Bracket Notation</h3>
+                </div>
+                <p>There are two ways to access object properties in JavaScript:</p>
+                
+                <div class="code-block-container">
+                    <div class="code-actions">
+                        <button class="code-btn run-btn" onclick="runCode(this)">Run</button>
+                        <button class="code-btn save-btn" onclick="saveCode(this)">Save</button>
+                    </div>
+                    <div class="code-block" contenteditable="true" spellcheck="false">
+const book = {
+    title: "JavaScript: The Good Parts",
+    author: "Douglas Crockford",
+    year: 2008
+};
+
+// Dot notation - when you know the exact property name
+console.log(book.title); // "JavaScript: The Good Parts"
+
+// Bracket notation - useful when property name is dynamic
+const property = "author";
+console.log(book[property]); // "Douglas Crockford"
+
+// Try accessing the year property using both notations
+                    </div>
+                    <div class="output"></div>
+                </div>
+                
+                <div class="note">
+                    <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                    <p>Use bracket notation when the property name contains spaces or special characters, or when it's stored in a variable.</p>
+                </div>
+                
+                <div class="real-world">
+                    <h4><i class="fas fa-globe"></i> Real World Application</h4>
+                    <p>When building a dynamic UI that displays different user information based on user selection, bracket notation allows you to access properties dynamically without writing complex conditional logic.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="methods">
+            <h2>Object Methods</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Defining and Using Methods</h3>
+                </div>
+                <p>Methods are functions that are properties of an object. They allow objects to "do things".</p>
+                
+                <div class="code-block-container">
+                    <div class="code-actions">
+                        <button class="code-btn run-btn" onclick="runCode(this)">Run</button>
+                        <button class="code-btn save-btn" onclick="saveCode(this)">Save</button>
+                    </div>
+                    <div class="code-block" contenteditable="true" spellcheck="false">
+const bankAccount = {
+    owner: "John Smith",
+    balance: 1000,
+    
+    // Method to deposit money
+    deposit(amount) {
+        this.balance += amount;
+        console.log(`Deposited $${amount}. New balance: $${this.balance}`);
+    },
+    
+    // Method to withdraw money
+    withdraw(amount) {
+        if (amount > this.balance) {
+            console.log("Insufficient funds!");
+            return;
+        }
+        this.balance -= amount;
+        console.log(`Withdrew $${amount}. New balance: $${this.balance}`);
+    }
+};
+
+// Try making some deposits and withdrawals
+bankAccount.deposit(500); // Deposited $500. New balance: $1500
+bankAccount.withdraw(200); // Withdrew $200. New balance: $1300
+                    </div>
+                    <div class="output"></div>
+                </div>
+                
+                <div class="real-world">
+                    <h4><i class="fas fa-globe"></i> Real World Application</h4>
+                    <p>Banking applications use objects with methods like this to handle account transactions. Each account is an object with properties (balance, owner) and methods (deposit, withdraw, transfer).</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>The 'this' Keyword</h3>
+                </div>
+                <p><code>this</code> refers to the current object context. It's crucial for object methods.</p>
+                
+                <div class="code-block-container">
+                    <div class="code-actions">
+                        <button class="code-btn run-btn" onclick="runCode(this)">Run</button>
+                        <button class="code-btn save-btn" onclick="saveCode(this)">Save</button>
+                    </div>
+                    <div class="code-block" contenteditable="true" spellcheck="false">
+const shoppingCart = {
+    items: [],
+    addItem(product, quantity) {
+        this.items.push({ product, quantity });
+        console.log(`Added ${quantity} ${product}(s) to cart`);
+    },
+    calculateTotal() {
+        return this.items.reduce((total, item) => {
+            return total + (item.quantity * 10); // $10 per item
+        }, 0);
+    }
+};
+
+// Try adding some items and calculating the total
+shoppingCart.addItem("Apple", 3);
+shoppingCart.addItem("Banana", 2);
+console.log(`Total: $${shoppingCart.calculateTotal()}`); // Total: $50
+                    </div>
+                    <div class="output"></div>
+                </div>
+                
+                <div class="note">
+                    <h4><i class="fas fa-lightbulb"></i> Important Note</h4>
+                    <p>Avoid using arrow functions for methods because they don't have their own <code>this</code> context. Use regular function syntax instead.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="real-world">
+            <h2>Real World Applications</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>E-commerce Product System</h3>
+                </div>
+                <p>A complete e-commerce product management system using objects.</p>
+                
+                <div class="code-block-container">
+                    <div class="code-actions">
+                        <button class="code-btn run-btn" onclick="runCode(this)">Run</button>
+                        <button class="code-btn save-btn" onclick="saveCode(this)">Save</button>
+                    </div>
+                    <div class="code-block" contenteditable="true" spellcheck="false">
+class Product {
+    constructor(id, name, price, inventory) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.inventory = inventory;
+    }
+    
+    applyDiscount(percent) {
+        this.price *= (1 - percent/100);
+    }
+}
+
+class ShoppingCart {
+    constructor() {
+        this.items = [];
+    }
+    
+    addItem(product, quantity) {
+        if (quantity > product.inventory) {
+            console.log(`Not enough ${product.name} in stock`);
+            return;
+        }
+        this.items.push({ product, quantity });
+        product.inventory -= quantity;
+    }
+    
+    getTotal() {
+        return this.items.reduce(
+            (total, item) => total + (item.product.price * item.quantity),
+            0
+        );
+    }
+    
+    checkout() {
+        console.log(`Your total is $${this.getTotal()}`);
+        console.log("Thank you for your purchase!");
+        this.items = [];
+    }
+}
+
+// Try creating products and using the shopping cart
+const laptop = new Product(1, "Laptop", 999, 10);
+const phone = new Product(2, "Phone", 699, 15);
+
+const cart = new ShoppingCart();
+cart.addItem(laptop, 1);
+cart.addItem(phone, 2);
+cart.checkout();
+                    </div>
+                    <div class="output"></div>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h4><i class="fas fa-pencil-alt"></i> Practice Exercise</h4>
+                <p>Extend the e-commerce system by adding:</p>
+                <ol>
+                    <li>A method to remove items from the cart</li>
+                    <li>A method to apply coupon codes for discounts</li>
+                    <li>Inventory alerts when stock is low</li>
+                </ol>
+                <div class="code-block-container">
+                    <div class="code-actions">
+                        <button class="code-btn run-btn" onclick="runCode(this)">Run</button>
+                        <button class="code-btn save-btn" onclick="saveCode(this)">Save</button>
+                    </div>
+                    <div class="code-block" contenteditable="true" spellcheck="false">
+// Your solution code here
+// Try implementing the exercise requirements
+                    </div>
+                    <div class="output"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Common Mistakes</h2>
+            <table>
+                <tr>
+                    <th>Mistake</th>
+                    <th>Problem</th>
+                    <th>Solution</th>
+                </tr>
+                <tr>
+                    <td>Forgetting commas</td>
+                    <td>Syntax errors when separating properties</td>
+                    <td>Always use commas between properties</td>
+                </tr>
+                <tr>
+                    <td>Using arrow functions for methods</td>
+                    <td><code>this</code> won't reference the object</td>
+                    <td>Use regular function syntax</td>
+                </tr>
+                <tr>
+                    <td>Modifying objects while iterating</td>
+                    <td>Can cause unexpected behavior</td>
+                    <td>Create a copy of keys first</td>
+                </tr>
+                <tr>
+                    <td>Deep copying objects</td>
+                    <td>Assignment creates a reference, not a copy</td>
+                    <td>Use <code>JSON.parse(JSON.stringify(obj))</code> or spread operator</td>
+                </tr>
+            </table>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="kemdev (2).png"kemdev Logo">
+                <span>KEMDEV</span>
+            </div>
+            <p>Master JavaScript and become a web development pro!</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2023 KEMDEV. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // You can replace the placeholder logo with your actual logo
+        document.getElementById('logo-img').src = 'your-logo-url-here.png';
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Function to run code from editable code blocks
+        function runCode(button) {
+            const codeBlock = button.parentElement.nextElementSibling;
+            const outputDiv = codeBlock.nextElementSibling;
+            const code = codeBlock.textContent;
+            
+            try {
+                // Clear previous output
+                outputDiv.innerHTML = '';
+                outputDiv.style.display = 'block';
+                
+                // Capture console.log output
+                const originalConsoleLog = console.log;
+                let output = '';
+                
+                console.log = function(message) {
+                    output += message + '\n';
+                    originalConsoleLog.apply(console, arguments);
+                };
+                
+                // Execute the code
+                eval(code);
+                
+                // Restore original console.log
+                console.log = originalConsoleLog;
+                
+                // Display output
+                if (output) {
+                    outputDiv.textContent = output;
+                } else {
+                    outputDiv.textContent = 'Code executed successfully (no output)';
+                }
+            } catch (error) {
+                outputDiv.textContent = `Error: ${error.message}`;
+                outputDiv.style.color = 'red';
+            }
+        }
+
+        // Function to save code to localStorage
+        function saveCode(button) {
+            const codeBlock = button.parentElement.nextElementSibling;
+            const code = codeBlock.textContent;
+            const card = codeBlock.closest('.card');
+            const title = card ? card.querySelector('h3').textContent : 'Untitled';
+            
+            // Save to localStorage
+            const savedCode = JSON.parse(localStorage.getItem('savedCode') || '{}');
+            savedCode[title] = code;
+            localStorage.setItem('savedCode', JSON.stringify(savedCode));
+            
+            // Show save confirmation
+            const outputDiv = codeBlock.nextElementSibling;
+            outputDiv.textContent = 'Code saved successfully!';
+            outputDiv.style.color = 'green';
+            outputDiv.style.display = 'block';
+            
+            // Hide after 2 seconds
+            setTimeout(() => {
+                outputDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        // Load saved code when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCode = JSON.parse(localStorage.getItem('savedCode') || '{}');
+            
+            document.querySelectorAll('.card').forEach(card => {
+                const title = card.querySelector('h3').textContent;
+                const codeBlock = card.querySelector('.code-block');
+                
+                if (savedCode[title] && codeBlock) {
+                    codeBlock.textContent = savedCode[title];
+                }
+            });
+        });
+    </script>
+</body>
+</html>
